@@ -46,6 +46,13 @@ return getters.doneTodos.length
     }
   },
   actions: {
+    increment(context,payload){
+      setTimeout(()=>{
+        context.commit('increment',payload)
+
+      },3000)
+    }
+
   },
   modules: {
   }
