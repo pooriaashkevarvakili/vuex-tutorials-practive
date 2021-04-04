@@ -25,7 +25,10 @@ export default {
   },
   methods:{
     onIncrement(){
- this.$store.dispatch('increment',{value:4})
+ this.$store.dispatch('actionB').then((res)=>{
+   console.log("calling success")
+   console.log(res)
+ })
     }
   }
 }

@@ -51,6 +51,20 @@ return getters.doneTodos.length
         context.commit('increment',payload)
 
       },3000)
+    },
+    actionA(context){
+return new Promise((resolve)=>{
+  setTimeout(()=>{
+    context.commit('increment',{value:1});
+    resolve('prefect')
+  },2000)
+})
+    },
+    actionB(context){
+      context.dispatch('actionA').then(res=>{
+       console.log(res)
+        console.log('calling success from action b')
+      })
     }
 
   },
