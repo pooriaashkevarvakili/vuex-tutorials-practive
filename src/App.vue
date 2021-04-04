@@ -1,11 +1,47 @@
-<template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+ <template>
+ <div>
+   <Counter/>
+ </div>
+   <div>
+     <h3>App Vue Counter</h3>
+     <p>
+       {{ count}}
+     </p>
+   </div>
+   <div>
+     <button @click.prevent="onIncrement()">Increment</button>
+   </div>
+   <div>
+     <TodoList/>
+   </div>
+   <div>
+     todo list completed:{{doneListCount}}
+   </div>
 </template>
+ <script>
+ import Counter from  "./components/Counter"
+ import TodoList from "./components/TodoList";
+ export default {
+   components:{
+     Counter,
+     TodoList
+   },
+   methods:{
+     onIncrement(){
+       this.$store.commit('increment',{value:4})
+     },
 
+   },
+   computed:{
+     count(){
+       return this.$store.state.count
+     },
+     doneListCount(){
+       return this.$store.getters.doneTodoList;
+     }
+   }
+ }
+ </script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
