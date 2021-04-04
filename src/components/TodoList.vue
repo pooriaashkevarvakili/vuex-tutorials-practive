@@ -6,6 +6,23 @@
       {{todo.name}}-({{todo.done?'Done':'notDone'}})
     </li>
   </ul>
+  <div>
+    <div v-if="todo" >
+  <h3>select  todo</h3>
+id:{{todo.id}}
+  </div>
+  </div>
+  <h3>
+    completed todos
+  </h3>
+  <ul>
+    <li v-for="todo in doneTodos" :key="todo.id">
+      <a href="#" @click.prevent="onTodoSelected(todo.id)" >
+        {{todo.name}}-({{todo.done?'Done':'notDone'}})
+      </a>
+
+    </li>
+  </ul>
 </div>
 </template>
 
@@ -14,7 +31,7 @@ export default {
   name: "TodoList",
   data(){
     return{
-
+selectedId:0
     }
   },
   computed:{
@@ -23,10 +40,19 @@ export default {
     },
     doneListCount(){
       return this.$store.getters.doneTodoList;
+    },
+    doneTodos(){
+      return this.$store.getters.doneTodos
+    },
+    todo(){
+      return this.$store.getters.getTodoById(this.selectedId)
     }
+
   },
   methods:{
-
+    onTodoSelected(id){
+this.selectedId=id;
+    }
   }
 }
 </script>

@@ -28,8 +28,15 @@ export default createStore({
     ]
   },
   getters:{
-    doneTodoList(state){
-return state.todos.filter(todo=>todo.done).length
+    getTodoById:(state)=>(id)=>{
+return state.todos.find((todo)=>todo.id===id);
+    },
+    doneTodos(state){
+      return state.todos.filter(todo=>todo.done)
+
+    },
+    doneTodoList(state,getters){
+return getters.doneTodos.length
 
     }
   },
