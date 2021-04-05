@@ -9,7 +9,7 @@
      </p>
    </div>
    <div>
-     <button @click.prevent="onIncrement()">Increment</button>
+     <button @click.prevent="increment({value:2})">Increment</button>
    </div>
    <div>
      <TodoList/>
@@ -19,6 +19,7 @@
    </div>
 </template>
  <script>
+ import {mapState,mapGetters,mapActions,mapMutations} from 'vuex'
  import Counter from  "./components/Counter"
  import TodoList from "./components/TodoList";
  export default {
@@ -27,18 +28,25 @@
      TodoList
    },
    methods:{
-     onIncrement(){
-       this.$store.dispatch('increment',{value:4})
-     },
+     ...mapActions({
+increment:'increment'
+     }),
+     ...mapMutations({
+       inc:'increment'
+     })
+
 
    },
    computed:{
-     count(){
-       return this.$store.state.count
-     },
-     doneListCount(){
-       return this.$store.getters.doneTodoList;
-     }
+...mapState({
+  count:state=>state.count,
+  todo:state=>state.todos
+}),
+     ...mapGetters({
+       doneListCount:'doneTodoList'
+     }),
+
+
    }
  }
  </script>

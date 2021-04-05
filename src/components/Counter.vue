@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import {mapState,mapActions} from 'vuex'
 export default {
   name: "Counter",
   data(){
@@ -19,17 +20,16 @@ export default {
     }
   },
   computed:{
-    count(){
-      return this.$store.state.count
-    }
+    ...mapState({
+      count:state=>state.count
+    })
+
   },
   methods:{
-    onIncrement(){
- this.$store.dispatch('actionB').then((res)=>{
-   console.log("calling success")
-   console.log(res)
- })
-    }
+    ...mapActions({
+      onIncrement:'actionB'
+    })
+
   }
 }
 </script>
